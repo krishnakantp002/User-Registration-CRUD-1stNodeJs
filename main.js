@@ -2,6 +2,8 @@ const express = require ('express');
 const cors = require ('cors');
 const dotenv = require ('dotenv');
 const pool = require ('./config/db.js');
+const userRoute = require('./routes/user.routes.js')
+const createUserTable = require('./data/createUserTale.js')
 
 dotenv.config ();
 const app = express ();
@@ -12,8 +14,14 @@ port = process.env.PORT || 3000;
 app.use (cors ());
 app.use (express.json ());
 
+//Routes
+app.use('/api',userRoute)
 
 //Error handling middleware
+
+
+//creating table if not exists
+createUserTable();
 
 
 //testing mysql connection
